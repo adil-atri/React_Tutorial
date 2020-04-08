@@ -41,7 +41,8 @@ class Game extends Component {
 
   render() {
     const history = this.state.history;
-    const current = history[this.state.stepNumber];
+    const step = this.state.stepNumber;
+    const current = history[step];
     const winner = calculateWinner(current.squares);
 
     const moves = history.map((step, move) => {
@@ -59,7 +60,11 @@ class Game extends Component {
     if (winner) {
       status = "Winner " + winner;
     } else {
-      status = "Next player: " + (this.state.xIsNext ? "X" : "O");
+      if (step === 9) {
+        status = "It's a tie!";
+      } else {
+        status = "Next player: " + (this.state.xIsNext ? "X" : "O");
+      }
     }
 
     return (
